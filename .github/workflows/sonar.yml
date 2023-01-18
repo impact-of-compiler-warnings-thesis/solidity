@@ -19,6 +19,7 @@ jobs:
               uses: SonarSource/sonarcloud-github-c-cpp@v1
             - name: Run build-wrapper
               run: |
+                  sudo apt update && sudo apt upgrade
                   sudo apt install ninja-build
                   sudo apt-get install libboost*
                   git clone https://github.com/Z3Prover/z3
