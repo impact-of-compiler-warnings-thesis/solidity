@@ -21,7 +21,13 @@ jobs:
               run: |
                   sudo apt install ninja-build
                   sudo apt-get install libboost*
-                  sudo apt-get -y install z3
+                  git clone https://github.com/Z3Prover/z3
+                  cd z3
+                  python scripts/mk_make.py
+                  cd build
+                  make
+                  sudo make install
+                  cd ../..
                   ./scripts/ci/build.sh
                   cd ..
                   build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} ninja -C build
