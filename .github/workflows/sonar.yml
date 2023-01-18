@@ -17,11 +17,13 @@ jobs:
                   fetch-depth: 0 # Shallow clones should be disabled for a better relevancy of analysis
             - name: Install sonar-scanner and build-wrapper
               uses: SonarSource/sonarcloud-github-c-cpp@v1
-            - name: Install deps
+            - name: Install dependencies
               run: |
-                  sudo apt update && sudo apt upgrade
-                  sudo apt install ninja-build
-                  sudo apt-get install libboost* 
+                  sudo apt update
+                  sudo apt upgrade
+                  sudo apt install ninja-build libboost*
+            - name: Build z3
+              run: |
                   wget https://github.com/Z3Prover/z3/archive/refs/tags/z3-4.11.2.tar.gz
                   tar -xf z3-4.11.2.tar.gz
                   cd z3-z3-4.11.2
@@ -31,9 +33,8 @@ jobs:
                   sudo make install
             - name: Run build-wrapper
               run: |
-                  mkdir build
-                  cd build
-                  make .. -GNinja
+                  mkdir build && cd build
+                  cmake .. -GNinja -DCMAKE_BUILD_TYPE=Debug
                   cd ..
                   build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} ninja -C build
             - name: Run sonar-scanner
