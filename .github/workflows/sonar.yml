@@ -24,8 +24,8 @@ jobs:
                   sudo apt-get install libboost*
                   wget https://github.com/Z3Prover/z3/archive/refs/tags/z3-4.11.2.tar.gz
                   mkdir z3
-                  tar -xf z3-4.11.2.tar.gz -C z3
-                  cd z3
+                  tar -xf z3-4.11.2.tar.gz
+                  cd z3-4.11.2
                   python scripts/mk_make.py
                   cd build
                   make
