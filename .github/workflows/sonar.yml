@@ -21,6 +21,7 @@ jobs:
               run: |
                   sudo apt install ninja-build
                   sudo apt-get install libboost*
+                  sudo apt-get -y install z3
                   ./scripts/ci/build.sh
                   cd ..
                   build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} ninja -C build
